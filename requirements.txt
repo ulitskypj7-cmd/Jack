@@ -1,0 +1,13 @@
+requests
+httpx
+user_agent
+cfonts
+pyfiglet
+rich
+beautifulsoup4
+colorama
+urllib3
+certifi
+charset-normalizer
+idna
+soupsieve
