@@ -6,10 +6,11 @@ ANISHPY — PROFESSIONAL HITTER (Premium Edition)
 - Serif Font + Animated UI
 - Premium Terminal Dashboard
 - Channel: @ANISHPY | Dev: @SUNRAKUV2
+- 24/7 RUNNING — NO EXPIRY
 """
 
-import sys
 import os
+import sys
 import time
 import random
 import json
@@ -29,15 +30,16 @@ from user_agent import generate_user_agent
 # CONFIGURATION
 # ---------------------------------------------------------------------
 MIN_FOLLOWERS = 20
-expiry_date = datetime(2027, 9, 14, 16, 23, 23)
-current_date = datetime.now()
-
-if current_date > expiry_date:
-    print("\n✖ Your Time Has Expired!")
-    print("Contact @SUNRAKUV2 for extension.")
-    sys.exit()
-
 THREADS = 80
+
+# 🔥 RAILWAY: Token aur Chat ID environment variable se lo
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
+
+if not BOT_TOKEN or not CHAT_ID:
+    print("❌ BOT_TOKEN and CHAT_ID environment variables required!")
+    print("📌 Set them in Railway Dashboard -> Variables")
+    sys.exit()
 
 # ---------------------------------------------------------------------
 # COLOURS — Premium Serif Palette
@@ -52,8 +54,6 @@ DIM = '\x1b[2;37m'
 RESET = '\033[0m'
 BOLD = '\x1b[1m'
 ITALIC = '\x1b[3m'
-UNDERLINE = '\x1b[4m'
-BLINK = '\x1b[5m'
 
 # ---------------------------------------------------------------------
 # ANIMATED LOADER
@@ -75,24 +75,18 @@ def animated_loader(text, duration=1.5):
 # ---------------------------------------------------------------------
 def show_banner():
     os.system('cls' if os.name == 'nt' else 'clear')
-    
-    # Animated glow effect
-    for i in range(3):
-        print(f"""
+    print(f"""
 {CYAN}╔══════════════════════════════════════════════════════════════╗
 ║                                                                  ║
 ║  {VIOLET}▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀{CYAN}  ║
-║  {WHITE}  𝑨 𝑵 𝑰 𝑺 𝑯 𝑷 𝒀{CYAN}  •  {VIOLET}𝑷 𝑹 𝑬 𝑴 𝑰 𝑼 𝑴{CYAN}  •  {GOLD}𝑯 𝑰 𝑻 𝑻 𝑬 𝑹{CYAN}  ║
+║  {WHITE}  A N I S H P Y{CYAN}  •  {VIOLET}P R E M I U M{CYAN}  •  {GOLD}H I T T E R{CYAN}  ║
 ║  {VIOLET}▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀{CYAN}  ║
 ║                                                                  ║
-║  {DIM}𝑪𝑯𝑨𝑵𝑵𝑬𝑳{CYAN}  @𝑨𝑵𝑰𝑺𝑯𝑷𝒀{DIM}                            ║
-║  {DIM}𝑫𝑬𝑽𝑬𝑳𝑶𝑷𝑬𝑹{CYAN}  @𝑺𝑼𝑵𝑹𝑨𝑲𝑼𝑽𝟐{DIM}                       ║
+║  {DIM}CHANNEL{CYAN}  @ANISHPY{DIM}                                ║
+║  {DIM}DEV{CYAN}  @SUNRAKUV2{DIM}                                   ║
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝{RESET}
 """)
-        time.sleep(0.3)
-        os.system('cls' if os.name == 'nt' else 'clear')
-        time.sleep(0.1)
 
 # ---------------------------------------------------------------------
 # PREMIUM STATS DISPLAY
@@ -100,9 +94,9 @@ def show_banner():
 def display(hits=0, good=0, bad=0):
     stats = f"""
 {CYAN}┌────────────────────────────────────────────────────────────┐
-│  {VIOLET}𝑳𝑰𝑽𝑬 𝑺𝑻𝑨𝑻𝑺{CYAN}  •  {GOLD}𝑨𝑵𝑰𝑺𝑯𝑷𝒀 𝑷𝑹𝑬𝑴𝑰𝑼𝑴{CYAN}               │
+│  {VIOLET}LIVE STATS{CYAN}  •  {GOLD}ANISHPY PREMIUM{CYAN}                │
 ├────────────────────────────────────────────────────────────┤
-│  {GREEN}𝑮𝑶𝑶𝑫  {WHITE}{good:>6}{CYAN}  │  {GOLD}𝑯𝑰𝑻𝑺  {WHITE}{hits:>6}{CYAN}  │  {RED}𝑩𝑨𝑫   {WHITE}{bad:>6}{CYAN}  │
+│  {GREEN}GOOD  {WHITE}{good:>6}{CYAN}  │  {GOLD}HITS  {WHITE}{hits:>6}{CYAN}  │  {RED}BAD   {WHITE}{bad:>6}{CYAN}  │
 └────────────────────────────────────────────────────────────┘{RESET}
 """
     sys.stdout.write('\r' + stats)
@@ -525,27 +519,26 @@ class ReportManager:
         reset_mask = self._fetch_reset_email(username)
         monetization = self._get_monetization_status(data)
 
-        # 🔥 Premium Serif Output
         lines = [
             "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-            f"  ✨ 𝑨𝑵𝑰𝑺𝑯𝑷𝒀 𝑷𝑹𝑶𝑭𝑬𝑺𝑺𝑰𝑶𝑵𝑨𝑳  ✦  𝑯𝑰𝑻 𝑭𝑶𝑼𝑵𝑫  ✨",
+            f"  ✨ ANISHPY PROFESSIONAL  ✦  HIT FOUND  ✨",
             "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-            f"  👤 𝑵𝒂𝒎𝒆       : {full_name}",
-            f"  🏷️ 𝑼𝒔𝒆𝒓𝒏𝒂𝒎𝒆   : @{username}",
-            f"  📧 𝑬𝒎𝒂𝒊𝒍      : {email}",
-            f"  🌐 𝑫𝒐𝒎𝒂𝒊𝒏     : {domain}",
-            f"  👥 𝑭𝒐𝒍𝒍𝒐𝒘𝒆𝒓𝒔  : {followers:,}",
-            f"  🔄 𝑭𝒐𝒍𝒍𝒐𝒘𝒊𝒏𝒈  : {following:,}",
-            f"  📸 𝑷𝒐𝒔𝒕𝒔      : {posts}",
-            f"  📅 𝑨𝒈𝒆        : {year}",
-            f"  💬 𝑩𝒊𝒐        : {bio if bio else '-'}",
-            f"  🔒 𝑹𝒆𝒔𝒆𝒕 𝑴𝒂𝒔𝒌 : {reset_mask}",
-            f"  💰 𝑴𝒐𝒏𝒆𝒕𝒊𝒛𝒂𝒕𝒊𝒐𝒏: {monetization}",
+            f"  👤 Name       : {full_name}",
+            f"  🏷️ Username   : @{username}",
+            f"  📧 Email      : {email}",
+            f"  🌐 Domain     : {domain}",
+            f"  👥 Followers  : {followers:,}",
+            f"  🔄 Following  : {following:,}",
+            f"  📸 Posts      : {posts}",
+            f"  📅 Age        : {year}",
+            f"  💬 Bio        : {bio if bio else '-'}",
+            f"  🔒 Reset Mask : {reset_mask}",
+            f"  💰 Monetization: {monetization}",
             "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-            f"  🔗 𝑷𝒓𝒐𝒇𝒊𝒍𝒆    : https://instagram.com/{username}",
+            f"  🔗 Profile    : https://instagram.com/{username}",
             "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-            "     🚀 𝑷𝒐𝒘𝒆𝒓𝒆𝒅 𝒃𝒚 𝑨𝑵𝑰𝑺𝑯𝑷𝒀",
-            "  📢 𝑪𝒉𝒂𝒏𝒏𝒆𝒍: @𝑨𝑵𝑰𝑺𝑯𝑷𝒀  │  👑 𝑫𝒆𝒗: @𝑺𝑼𝑵𝑹𝑨𝑲𝑼𝑽𝟐",
+            "     🚀 Powered by ANISHPY",
+            "  📢 Channel: @ANISHPY  │  👑 Dev: @SUNRAKUV2",
             "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
         ]
 
@@ -569,7 +562,6 @@ class ReportManager:
 
         console_msg = '\n'.join(colored_lines)
 
-        # 🔥 HTML for Telegram — Serif + Italic
         html_lines = []
         for line in lines:
             if ':' in line and not line.startswith('━') and not line.startswith('  ✨') and not line.startswith('     🚀') and not line.startswith('  📢'):
@@ -612,35 +604,21 @@ class ReportManager:
             return "-"
 
 # ---------------------------------------------------------------------
-# MAIN PROCESSING
+# MAIN PROCESSING — 24/7 (No Expiry)
 # ---------------------------------------------------------------------
-
 def main():
-    global hits, good, bad, bot_token, chat_id
+    global hits, good, bad
     
     show_banner()
     animated_loader("Initializing Core Modules", 1.5)
-    
-    print(f"{CYAN}𝑬𝒏𝒕𝒆𝒓 𝒚𝒐𝒖𝒓 𝑪𝒉𝒂𝒕 𝑰𝑫:{RESET}")
-    chat_id = input(f"{WHITE}➜ {RESET}").strip()
-    animated_loader("Verifying Chat ID", 1.0)
-    
-    print(f"{CYAN}𝑬𝒏𝒕𝒆𝒓 𝒚𝒐𝒖𝒓 𝑩𝒐𝒕 𝑻𝒐𝒌𝒆𝒏:{RESET}")
-    bot_token = input(f"{WHITE}➜ {RESET}").strip()
-    animated_loader("Authenticating Bot", 1.0)
+    animated_loader("Verifying Token & Chat ID", 1.0)
     
     os.system('cls' if os.name == 'nt' else 'clear')
     show_banner()
     
-    global expire_time
-    start_time = time.time()
-    time_until_expiry = (expiry_date - current_date).total_seconds()
-    expire_time = start_time + time_until_expiry
-    expire_datetime = expiry_date.strftime('%Y-%m-%d %H:%M:%S')
-    
-    print(f"\n{VIOLET}𝑴𝒊𝒏𝒊𝒎𝒖𝒎 𝑭𝒐𝒍𝒍𝒐𝒘𝒆𝒓𝒔: {WHITE}{MIN_FOLLOWERS}")
-    print(f"{VIOLET}𝑻𝒉𝒓𝒆𝒂𝒅𝒔: {WHITE}{THREADS}")
-    print(f"{VIOLET}𝑨𝒖𝒕𝒐-𝒔𝒕𝒐𝒑: {WHITE}{expire_datetime}\n")
+    print(f"\n{VIOLET}Minimum Followers: {WHITE}{MIN_FOLLOWERS}")
+    print(f"{VIOLET}Threads: {WHITE}{THREADS}")
+    print(f"{GREEN}⚡ 24/7 RUNNING — NO EXPIRY{RESET}\n")
     
     animated_loader("Starting Scanner Engine", 1.5)
     
@@ -649,17 +627,13 @@ def main():
     bad = 0
     display(0, 0, 0)
     
-    reporter = ReportManager(bot_token, chat_id)
+    reporter = ReportManager(BOT_TOKEN, CHAT_ID)
     google = GoogleChecker()
     insta = InstagramChecker()
     
     def process_user():
         global hits, good, bad
-        while True:
-            if time.time() > expire_time:
-                print(f"\n{WHITE}𝑻𝒊𝒎𝒆 𝒆𝒙𝒑𝒊𝒓𝒆𝒅. 𝑺𝒕𝒐𝒑𝒑𝒊𝒏𝒈 𝒘𝒐𝒓𝒌𝒆𝒓𝒔.{RESET}")
-                sys.exit(0)
-
+        while True:  # 🔥 Infinite loop — 24/7
             try:
                 user_id = random.randint(2500000000, 21254029834)
                 user_data = insta.get_user_data(user_id)
@@ -724,7 +698,7 @@ def main():
         while True:
             time.sleep(1)
     except KeyboardInterrupt:
-        print('\n' + CYAN + '◄  𝑨𝑵𝑰𝑺𝑯𝑷𝒀 — 𝑺𝑬𝑺𝑺𝑰𝑶𝑵 𝑬𝑵𝑫𝑬𝑫  ►' + RESET)
+        print('\n' + CYAN + '◄  ANISHPY — SESSION ENDED  ►' + RESET)
 
 # ---------------------------------------------------------------------
 # START
